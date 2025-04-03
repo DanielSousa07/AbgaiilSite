@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presente para Você</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap');
+        
+        :root {
+            --soft-yellow: #FFF5D6;
+            --warm-yellow: #FFE8A3;
+            --accent-yellow: #FFD166;
+            --subtle-shadow: rgba(255, 209, 102, 0.3);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: var(--soft-yellow);
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .present-box {
+            width: 100%;
+            max-width: 350px;
+            padding: 30px 25px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 10px 30px var(--subtle-shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .present-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--warm-yellow), var(--accent-yellow));
+        }
+        
+        .present-box p {
+            font-size: 1.2rem;
+            color: #5C4B37;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            min-width: 100px;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(to right, var(--warm-yellow), var(--accent-yellow));
+            color: #5C4B37;
+            box-shadow: 0 4px 15px var(--subtle-shadow);
+        }
+        
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--subtle-shadow);
+        }
+        
+        .btn-no {
+            background: white;
+            color: #5C4B37;
+            border: 2px solid var(--warm-yellow);
+            position: relative;
+        }
+        
+        .btn-no:hover {
+            background: var(--soft-yellow);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.6;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float-up 6s linear infinite;
+        }
+        .btn-yes {
+    display: inline-block; /* Para o link se comportar como botão */
+    text-align: center;
+}
+
+/* Garantir que o link não tenha estilos indesejados */
+a.btn {
+    text-decoration: none;
+    color: inherit;
+}
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Efeito de clique no botão */
+        .btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Responsividade extra para telas muito pequenas */
+        @media (max-width: 400px) {
+            .present-box {
+                padding: 25px 20px;
+            }
+            
+            .present-box p {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <div class="present-box">
+        <p>Quer descobrir o presente que preparei com carinho para você?</p>
+        <div class="buttons">
+            <a href="presente.html" class="btn btn-yes" role="button">Quero ver!</a>
+            <button class="btn btn-no" id="noBtn">Agora não</button>
+        </div>
+    </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const noBtn = document.getElementById('noBtn');
+    const floatingElements = document.getElementById('floatingElements');
+    const elementShapes = ['✦', '✧', '❀', '✿', '♡'];
+    const presentBox = document.querySelector('.present-box');
+    const yesBtn = document.querySelector('.btn-yes'); // Adicionado
+    
+    // Criar elementos flutuantes
+    function createFloatingElements() {
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.innerHTML = elementShapes[Math.floor(Math.random() * elementShapes.length)];
+                element.style.color = ['#FFE8A3', '#FFD166', '#FFEEBB'][Math.floor(Math.random() * 3)];
+                element.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                element.style.animationDelay = (Math.random() * 3) + 's';
+                floatingElements.appendChild(element);
+                
+                // Remover após animação
+                setTimeout(() => {
+                    element.remove();
+                }, 8000);
+            }, i * 300);
+        }
+    }
+    
+    // Função para mover o botão
+    function moveButton() {
+        const boxWidth = presentBox.offsetWidth;
+        const boxHeight = presentBox.offsetHeight;
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        
+        // Posições aleatórias dentro da área do present-box
+        const maxLeft = boxWidth - btnWidth;
+        const maxTop = boxHeight - btnHeight;
+        
+        const newLeft = Math.random() * maxLeft;
+        const newTop = Math.random() * maxTop;
+        
+        noBtn.style.position = "absolute";
+        noBtn.style.left = newLeft + 'px';
+        noBtn.style.top = newTop + 'px';
+        
+        // Criar efeito visual
+        createButtonEffect(newLeft + (btnWidth/2), newTop + btnHeight);
+    }
+    
+    // Criar efeitos visuais ao redor do botão
+    function createButtonEffect(x, y) {
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.innerHTML = '❀';
+                element.style.color = '#FFD166';
+                element.style.fontSize = '18px';
+                element.style.left = x + 'px';
+                element.style.top = y + 'px';
+                element.style.animationDuration = '3s';
+                floatingElements.appendChild(element);
+                
+                setTimeout(() => {
+                    element.remove();
+                }, 3000);
+            }, i * 200);
+        }
+    }
+    
+    // Iniciar elementos flutuantes
+    createFloatingElements();
+          setInterval(createFloatingElements, 5000);
+          
+          // Botão "Agora não" fugitivo
+          noBtn.addEventListener('mouseover', moveButton);
+          noBtn.addEventListener('touchstart', function(e) {
+              e.preventDefault();
+              moveButton();
+          }, { passive: false });
+          
+          // Garantir que o botão não saia da tela em mobile
+          window.addEventListener('resize', function() {
+              noBtn.style.position = "static";
+          });
+          
+          // Modificação importante para o botão Sim:
+          yesBtn.addEventListener('click', function(e) {
+              // Garante que o clique funcione mesmo se outros eventos interferirem
+              return true;
+          });
+          
+          // Simplificando o tratamento de toque para o botão Sim
+          yesBtn.addEventListener('touchstart', function(e) {
+              // Apenas para feedback visual
+              this.style.transform = 'scale(0.95)';
+          }, { passive: true });
+          
+          yesBtn.addEventListener('touchend', function() {
+              this.style.transform = '';
+          }, { passive: true });
+          
+          // Removemos o stopPropagation que podia estar bloqueando
+      });
+    </script>
+</body>
+</html>
