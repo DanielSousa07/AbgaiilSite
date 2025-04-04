@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap');
+        
+        :root {
+            --soft-yellow: #FFF5D6;
+            --warm-yellow: #FFE8A3;
+            --accent-yellow: #FFD166;
+            --subtle-shadow: rgba(255, 209, 102, 0.3);
+            --text-color: #5C4B37;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            padding: 20px;
+            background-color: var(--soft-yellow);
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warm-yellow), var(--accent-yellow));
+            border-radius: 2px;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--subtle-shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .photo-caption {
+            padding: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            background: white;
+        }
+        
+        .message-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px var(--subtle-shadow);
+            position: relative;
+        }
+        
+        .message-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--warm-yellow), var(--accent-yellow));
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .message-section h2 {
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .message-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.6;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float-up 6s linear infinite;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .birthday-wish {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .birthday-wish h2 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+        
+        .birthday-wish p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            min-width: 100px;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(to right, var(--warm-yellow), var(--accent-yellow));
+            color: var(--text-color);
+            box-shadow: 0 4px 15px var(--subtle-shadow);
+        }
+        
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--subtle-shadow);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .photo-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .message-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Feliz Aniversário!</h1>
+            <p>Um dia especial para uma pessoa incrível</p>
+        </header>
+        
+        <div class="birthday-wish">
+            <h2>Para a pessoa mais especial</h2>
+            <p>Hoje é o seu dia e quero que seja maravilhoso como você é!</p>
+        </div>
+        
+        <div class="photo-gallery">
+            <!-- Foto 1 -->
+            <div class="photo-card">
+                <img src="imagens/Cabelo.jpg" alt="Descrição da foto 1">
+                <div class="photo-caption">Um cabelo impecavél...</div>
+            </div>
+            
+            <!-- Foto 2 -->
+            <div class="photo-card">
+                <img src="imagens/Beleza.jpg" alt="Descrição da foto 2">
+                <div class="photo-caption">Sua beleza ilumina qualquer lugar</div>
+            </div>
+            
+            <!-- Foto 3 -->
+            <div class="photo-card">
+                <img src="imagens/sorriso.jpg" alt="Descrição da foto 3">
+                <div class="photo-caption">Seu sorriso é contagiante</div>
+            </div>
+            <div class="photo-card">
+                <img src="imagens/Matutinha.jpg" alt="Descrição da foto 4">
+                <div class="photo-caption">Você matutinha...</div>
+            </div>
+            <div class="photo-card">
+                <img src="imagens/lingua.jpg" alt="Descrição da foto 4">
+                <div class="photo-caption">KKK você com a linguinha...</div>
+            </div>
+            <div class="photo-card">
+                <img src="imagens/unhas.jpg" alt="Descrição da foto 4">
+                <div class="photo-caption">KNão podia faltar as unhas belas...</div>
+            </div>
+            
+            <!-- Adicione mais fotos conforme necessário -->
+        </div>
+
+        
+        <div class="message-section">
+            <h2>Minha Mensagem para Você</h2>
+            <p>Querida Abgail,</p>
+            <p>Hoje é o seu dia... Estou fazendo esse site alguns dias antes(para não ter erro KKKKK) Bom, como começar? Eu quero dizer que você é a pessoa mais animada e contagiante que conheço. Eu amo sua ernegia, e estar com você sempre me alegra. Eu sou eternamente grato por ter você sempre ao meu lado.</p>
+            <p>Sua bondade, seu sorriso e sua maneira única de ver o mundo fazem de você alguém realmente especial. Que este novo ano de vida traga ainda mais alegrias, conquistas e momentos felizes.</p>
+            <p>Que você continue sendo essa pessoa incrível, cheia de luz e amor para compartilhar. Saiba que estarei aqui para celebrar cada conquista, apoiar nos desafios, compartilhar muitos sorrisos e adimirar cada detalhe matutinha que você tem.</p>
+            <p>Feliz aniversário! Que este seja apenas o começo de um ano repleto de felicidades e seu sucesso, pois uma menina incrivel como você merece!.</p>
+            <p>Com todo meu carinho,</p>
+            <p>Daniel</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingElements = document.getElementById('floatingElements');
+            const elementShapes = ['✦', '✧', '❀', '✿', '♡'];
+            
+            // Criar elementos flutuantes
+            function createFloatingElements() {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const element = document.createElement('div');
+                        element.className = 'floating-element';
+                        element.innerHTML = elementShapes[Math.floor(Math.random() * elementShapes.length)];
+                        element.style.color = ['#FFE8A3', '#FFD166', '#FFEEBB'][Math.floor(Math.random() * 3)];
+                        element.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                        element.style.left = Math.random() * 100 + '%';
+                        element.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                        element.style.animationDelay = (Math.random() * 3) + 's';
+                        floatingElements.appendChild(element);
+                        
+                        // Remover após animação
+                        setTimeout(() => {
+                            element.remove();
+                        }, 8000);
+                    }, i * 300);
+                }
+            }
+            
+            // Iniciar elementos flutuantes
+            createFloatingElements();
+            setInterval(createFloatingElements, 5000);
+        });
+    </script>
+</body>
+</html>
