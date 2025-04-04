@@ -127,6 +127,77 @@
             text-align: justify;
         }
         
+        /* Nova seção de poema */
+        .poem-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px var(--subtle-shadow);
+            position: relative;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .poem-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent-yellow), var(--warm-yellow));
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .poem-section h2 {
+            color: var(--accent-yellow);
+            margin-bottom: 25px;
+            font-style: normal;
+        }
+        
+        .poem-section p {
+            line-height: 2;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Seção de fotos anime */
+        .anime-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .anime-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--subtle-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .anime-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--subtle-shadow);
+        }
+        
+        .anime-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .anime-caption {
+            padding: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+            background: white;
+        }
+        
         .floating-elements {
             position: fixed;
             top: 0;
@@ -212,11 +283,11 @@
                 font-size: 2rem;
             }
             
-            .photo-gallery {
+            .photo-gallery, .anime-gallery {
                 grid-template-columns: 1fr;
             }
             
-            .message-section {
+            .message-section, .poem-section {
                 padding: 20px;
             }
         }
@@ -256,21 +327,18 @@
             </div>
             <div class="photo-card">
                 <img src="imagens/Matutinha.jpg" alt="Descrição da foto 4">
-                <div class="photo-caption">Você matutinha...</div>
+                <div class="photo-caption">Seu jeito matuto...</div>
             </div>
             <div class="photo-card">
                 <img src="imagens/lingua.jpg" alt="Descrição da foto 4">
-                <div class="photo-caption">KKK você com a linguinha...</div>
+                <div class="photo-caption">KKK você doidinha...</div>
             </div>
             <div class="photo-card">
                 <img src="imagens/unhas.jpg" alt="Descrição da foto 4">
-                <div class="photo-caption">KNão podia faltar as unhas belas...</div>
+                <div class="photo-caption">E não podia faltar as unhas belas...</div>
             </div>
-            
-            <!-- Adicione mais fotos conforme necessário -->
         </div>
 
-        
         <div class="message-section">
             <h2>Minha Mensagem para Você</h2>
             <p>Querida Abgail,</p>
@@ -281,8 +349,27 @@
             <p>Com todo meu carinho,</p>
             <p>Daniel</p>
         </div>
-    </div>
-    
+        
+        <!-- Nova seção de poema -->
+        <div class="poem-section">
+            <h2>Um Poema para Você</h2>
+            <p>No dia em que o mundo ganhou você,</p>
+            <p>As estrelas sorriram e o sol brilhou mais forte,</p>
+            <p>Porque sabiam que uma alma especial chegava,</p>
+            <p>Para iluminar cada caminho que percorresse.</p>
+            <br>
+            <p>Seus olhos refletem o céu estrelado,</p>
+            <p>Seu sorriso aquece como o sol da manhã,</p>
+            <p>Seu coração transborda amor e bondade,</p>
+            <p>És a personificação da beleza e da graça.</p>
+            <br>
+            <p>Hoje celebramos não só mais um ano,</p>
+            <p>Mas cada riso, cada sonho, cada conquista,</p>
+            <p>Que a vida continue te presenteando,</p>
+            <p>Como você presenteia todos ao seu redor.</p>
+            <br>
+            <p>Feliz aniversário, minha estrela!</p>
+        </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const floatingElements = document.getElementById('floatingElements');
